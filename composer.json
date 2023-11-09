@@ -1,0 +1,30 @@
+{
+    "name": "gymers/tonglianpay",
+    "description": "tonglianpay sdk for php",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Gymers\\TonglianPay\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Gymers\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "gymers",
+            "email": "2537332273@qq.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "7.5"
+    },
+    "require": {
+        "php": ">=7.1",
+        "guzzlehttp/guzzle": "^6.5",
+        "monolog/monolog": "^1.23"
+    }
+}

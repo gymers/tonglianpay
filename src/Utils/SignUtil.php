@@ -21,7 +21,7 @@ class SignUtil
             'request' => $request,
         ];
         $data = XmlUtil::arrayToXml($data);
-        $data = iconv('GBK', 'UTF-8', $data);
+        $data = iconv('GBK', 'UTF-8//IGNORE', $data);
 
         return self::getSign($config, $data);
     }

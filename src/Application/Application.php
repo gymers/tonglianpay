@@ -40,7 +40,7 @@ class Application
                 'request' => $request,
             ];
             $data = XmlUtil::arrayToXml($data);
-            $data = iconv('GBK', 'UTF-8', $data);
+            $data = iconv('GBK', 'UTF-8//IGNORE', $data);
             LogUtil::info($this->config->log_path, '通联request:', [$data]);
             $content = $this->handleRequest($data);
         }
@@ -119,7 +119,7 @@ class Application
         $encryptedText = substr($response, 0, $length) . '</transaction>';
         LogUtil::info($this->config->log_path, '通联response:', [$encryptedText]);
 
-        $response = XmlUtil::xmlToArray(iconv('UTF-8', 'gbk//TRANSLIT', $encryptedText));
+        $response = XmlUtil::xmlToArray(iconv('UTF-8', 'GBK//IGNORE', $encryptedText));
 
 
         $sign_code = $response['head']['sign_code'];

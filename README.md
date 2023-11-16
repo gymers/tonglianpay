@@ -47,6 +47,7 @@ $request->sep_detail = json_encode([[
 ]]);
 $request->order_valid_time = '';
 $request->pay_auth_code = '';
+$request->mcht_no = '';
 $request->prod_import_flag = '0';
 $request->order_num = '';
 $request->resp_url = '';

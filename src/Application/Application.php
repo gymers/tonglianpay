@@ -41,7 +41,7 @@ class Application
             ];
             $data = XmlUtil::arrayToXml($data);
             $data = iconv('GBK', 'UTF-8//IGNORE', $data);
-            LogUtil::info($this->config->log_path, '通联request:', [$data]);
+            LogUtil::info($this->config->log_path, '通联request:', [str_replace("\n", "", $data)]);
             $content = $this->handleRequest($data);
         }
 
@@ -117,10 +117,9 @@ class Application
 
         $length = stripos($response, '</transaction>');
         $encryptedText = substr($response, 0, $length) . '</transaction>';
-        LogUtil::info($this->config->log_path, '通联response:', [$encryptedText]);
+        LogUtil::info($this->config->log_path, '通联response:', [str_replace("\n", "", $encryptedText)]);
 
         $response = XmlUtil::xmlToArray(iconv('UTF-8', 'GBK//IGNORE', $encryptedText));
-
 
         $sign_code = $response['head']['sign_code'];
         $data = str_replace('<sign_code>' . $sign_code . '</sign_code>', '', $encryptedText);

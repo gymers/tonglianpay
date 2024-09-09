@@ -41,7 +41,9 @@ class Application
             ];
             $data = XmlUtil::arrayToXml($data);
             $data = iconv('GBK', 'UTF-8//IGNORE', $data);
-            LogUtil::info($this->config->log_path, '通联request:', [str_replace("\n", "", $data)]);
+            if (isset($this->config->log_path)) {
+                LogUtil::info($this->config->log_path, '通联request:', [str_replace("\n", "", $data)]);
+            }
             $content = $this->handleRequest($data);
         }
 
@@ -60,7 +62,7 @@ class Application
         if (strpos($class, Request::PREFIX) === false) {
             return $response;
         }
-        return $this->handleReponse($response);
+        return $this->handleResponse($response);
     }
 
     /**
@@ -89,7 +91,7 @@ class Application
      * @param string $response
      * @return mixed
     */
-    public function handleReponse(string $response)
+    public function handleResponse(string $response)
     {
         if (0 === strpos($response, Response::NOTIFY_PREFIX)) {
             $response = str_replace(Response::NOTIFY_PREFIX, '', urldecode($response));
@@ -117,7 +119,9 @@ class Application
 
         $length = stripos($response, '</transaction>');
         $encryptedText = substr($response, 0, $length) . '</transaction>';
-        LogUtil::info($this->config->log_path, '通联response:', [str_replace("\n", "", $encryptedText)]);
+        if (isset($this->config->log_path)) {
+            LogUtil::info($this->config->log_path, '通联response:', [str_replace("\n", "", $encryptedText)]);
+        }
 
         $response = XmlUtil::xmlToArray(iconv('UTF-8', 'GBK//IGNORE', $encryptedText));
 

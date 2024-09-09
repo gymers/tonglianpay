@@ -25,7 +25,7 @@ class NotifyTest extends TestCase
 
         $response = 'repMsg=**********';
 
-        $response = TonglianPay::config($config)->handleReponse($response);
+        $response = TonglianPay::config($config)->handleResponse($response);
 
         $this->assertArrayHasKey('resp_code', $response, json_encode($response));
     }
